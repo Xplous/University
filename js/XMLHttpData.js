@@ -14,7 +14,6 @@ btn.onclick = function () {
         if (TodoHttp.readyState === 4 && TodoHttp.status === 200) {
             // Если запрос успешен парсим данные Todo
             let todoData = JSON.parse(TodoHttp.responseText);
-
             // Инициализируем второй GET-запрос на получение Users
             UserHttp.open("GET", "https://jsonplaceholder.typicode.com/users", true);
             UserHttp.onreadystatechange = function () {
