@@ -13,13 +13,13 @@ btn.onclick = function () {
     TodoHttp.onreadystatechange = function () {
         if (TodoHttp.readyState === 4 && TodoHttp.status === 200) {
             // Если запрос успешен парсим данные Todo
-            let todoData = JSON.parse(TodoHttp.responseText);
+            let todoData = JSON.parse(TodoHttp.response);
             // Инициализируем второй GET-запрос на получение Users
             UserHttp.open("GET", "https://jsonplaceholder.typicode.com/users", true);
             UserHttp.onreadystatechange = function () {
                 if (UserHttp.readyState === 4 && UserHttp.status === 200) {
                     // Если запрос успешен парсим данные о Users
-                    let userData = JSON.parse(UserHttp.responseText);
+                    let userData = JSON.parse(UserHttp.response);
                     // Проходимся по массиву todoData, возвращаем новый массив с данными о пользователе.
                     let tasks = todoData.map(function (todo) {
                         // Проходимся по массиву userData, ищем совпавший id c userId
@@ -35,26 +35,26 @@ btn.onclick = function () {
                     });
                     // Создаём тело таблицы
                     let tbody = document.createElement("tbody");
-                    table.appendChild(tbody);
+                    table.append(tbody);
                     // Проходимся по массиву tasks, создаём колонки и присваиваем им текст по индексу
                     tasks.forEach(function (task, index) {
                         let row = document.createElement("tr");
-                        tbody.appendChild(row);
+                        tbody.append(row);
                         let cell = document.createElement("td");
                         cell.textContent = index + 1;
-                        row.appendChild(cell);
+                        row.append(cell);
                         cell = document.createElement("td");
                         cell.textContent = task.userName;
-                        row.appendChild(cell);
+                        row.append(cell);
                         cell = document.createElement("td");
                         cell.textContent = task.title;
-                        row.appendChild(cell);
+                        row.append(cell);
                         cell = document.createElement("td");
                         let checkbox = document.createElement("input");
                         checkbox.type = "checkbox";
                         checkbox.checked = task.completed;
-                        cell.appendChild(checkbox);
-                        row.appendChild(cell);
+                        cell.append(checkbox);
+                        row.append(cell);
                     });
                 }
             };
